@@ -3,11 +3,11 @@
   "variables": {},
   "builders": [
     {
-      "ami_description": "AWS Native Chef Stack OS 5.0.0",
+      "ami_description": "CentOS 7.x AMI enabled with updates and Chrony",
       "ami_groups": [
         "all"
       ],
-      "ami_name": "aws-native-chef-server-5.0.{{isotime \"200601021504\"}}",
+      "ami_name": "CentOS 7.x ENA Enabled {{isotime \"200601021504\"}}",
       "ami_regions": [
       ],
       "communicator": "ssh",
@@ -19,10 +19,10 @@
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
-          "name": "centos-7-minimal-install-*",
+          "name": "CentOS Linux 7 x86_64 HVM EBS ENA*",
           "root-device-type": "ebs"
         },
-        "owners": ["self", "406084061336"],
+        "owners": ["self", "679593333241"],
         "most_recent": true
       },
       "ssh_pty": true,
@@ -37,17 +37,8 @@
       "execute_command": "echo 'packer' | sudo -S env {{ .Vars }} {{ .Path }}",
       "scripts": [
         "scripts/update_system.sh",
-        "scripts/update_grub.sh",
-        "scripts/disable_selinux.sh",
-        "scripts/config_sshd.sh",
         "scripts/tune_system.sh",
-        "scripts/install_essentials.sh",
-        "scripts/install_admin_tools.sh",
-        "scripts/install_ssm_agent.sh",
         "scripts/config_chrony.sh",
-        "scripts/disable_kdump.sh",
-        "scripts/config_journald.sh",
-        "scripts/marketplace_dl.sh",
         "scripts/install_final.sh"
       ]
     }
